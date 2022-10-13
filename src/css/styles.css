@@ -18,15 +18,18 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
-ul{
+ul {
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
 }
 li {
   list-style-type: none;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 .img {
   width: 50px;
@@ -39,7 +42,7 @@ img {
   width: 100%;
   height: auto;
 }
-p{
+p {
   margin: 0;
 }
 .country {
@@ -58,7 +61,6 @@ p{
   gap: 10px;
 }
 .country__item {
-
 }
 .country__descr {
   font-weight: 700;

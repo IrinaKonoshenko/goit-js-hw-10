@@ -1,7 +1,7 @@
 import './css/styles.css';
 import { fetchCountries } from './fetchCountries';
 import debounce from 'lodash.debounce';
-
+import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -16,6 +16,12 @@ function onInput(e) {
     list.innerHTML = '';
     info.innerHTML = '';
     if (!res || res.length === 0) return;
+    if (res.length > 10) {
+      Notiflix.Notify.info(
+        'Too many matches found. Please enter a more specific name.'
+      );
+      return;
+    }
     if (res.length === 1) {
       const country = res[0];
       info.innerHTML = `
@@ -47,6 +53,8 @@ function onInput(e) {
         })
         .join('');
     }
+  }).catch(() => {
+    Notiflix.Notify.failure("Oops, there is no country with that name");
   });
 }
 
