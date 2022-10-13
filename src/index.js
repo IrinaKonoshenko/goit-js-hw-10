@@ -11,11 +11,11 @@ const info = document.querySelector('.country-info');
 
 function onInput(e) {
   const value = e.target.value;
+  list.innerHTML = '';
+  info.innerHTML = '';
   if (value.length < 1) return;
   fetchCountries(value)
     .then(res => {
-      list.innerHTML = '';
-      info.innerHTML = '';
       if (!res || res.length === 0) return;
       if (res.length > 10) {
         Notiflix.Notify.info(
