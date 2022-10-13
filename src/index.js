@@ -12,19 +12,20 @@ const info = document.querySelector('.country-info');
 function onInput(e) {
   const value = e.target.value;
   if (value.length < 1) return;
-  fetchCountries(value).then(res => {
-    list.innerHTML = '';
-    info.innerHTML = '';
-    if (!res || res.length === 0) return;
-    if (res.length > 10) {
-      Notiflix.Notify.info(
-        'Too many matches found. Please enter a more specific name.'
-      );
-      return;
-    }
-    if (res.length === 1) {
-      const country = res[0];
-      info.innerHTML = `
+  fetchCountries(value)
+    .then(res => {
+      list.innerHTML = '';
+      info.innerHTML = '';
+      if (!res || res.length === 0) return;
+      if (res.length > 10) {
+        Notiflix.Notify.info(
+          'Too many matches found. Please enter a more specific name.'
+        );
+        return;
+      }
+      if (res.length === 1) {
+        const country = res[0];
+        info.innerHTML = `
           <div class="country">
             <div class="img"><img src="${country.flags.svg}"></div>
             <p class="country__title">${country.name.official}</p>
@@ -41,21 +42,22 @@ function onInput(e) {
             ).join(', ')}</p>
           </div>
         `;
-    } else {
-      list.innerHTML = res
-        .map(country => {
-          return `
+      } else {
+        list.innerHTML = res
+          .map(country => {
+            return `
           <li>
             <div class="img"><img src="${country.flags.svg}"></div>
             <p>${country.name.official}</p>
           </li>
         `;
-        })
-        .join('');
-    }
-  }).catch(() => {
-    Notiflix.Notify.failure("Oops, there is no country with that name");
-  });
+          })
+          .join('');
+      }
+    })
+    .catch(() => {
+      Notiflix.Notify.failure('Oops, there is no country with that name');
+    });
 }
 
 input.addEventListener(
