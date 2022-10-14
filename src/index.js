@@ -10,7 +10,7 @@ const list = document.querySelector('.country-list');
 const info = document.querySelector('.country-info');
 
 function onInput(e) {
-  const value = e.target.value;
+  const value = e.target.value.trim();
   list.innerHTML = '';
   info.innerHTML = '';
   if (value.length < 1) return;
